@@ -4,9 +4,9 @@ var webpack = require('webpack'),
     // JS压缩插件
     uglifyJsPlugin = webpack.optimize.UglifyJsPlugin,
     path = require('path');
-
+//  webpack -w 
 module.exports = {
-  entry: {
+  entry: {   // 源文件_20160531
     'movieBundle': [
       './public/scripts/components/movie/movie_index'      // 引入电影首页JS脚本
     ],
@@ -14,7 +14,7 @@ module.exports = {
       './public/scripts/components/music/music_index'      // 引入音乐首页JS脚本
     ]
   },
-  output: {
+  output: {   // 压缩文件_20160531
     path: path.join(__dirname, '/public/libs/scripts/components/'),  // 输出JS路径
     filename: '[name].min.js'
   },
