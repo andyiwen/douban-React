@@ -54,6 +54,12 @@ gulp.task('images', function() {
     .pipe(gulp.dest(path.dest.images));
 });
 
+/** --20161117 发现的问题，需三个窗口同时打开，
+ * 1. sudo mongod
+ * 2. sudo gulp  
+ * 3. webpack -w
+ * 该 task 未起作用，需分别执行四个子 task，然后执行 webpack -w 合并react jsx 文件
+ */ 
 // watch
 gulp.task('watch', function() {
   gulp.watch(path.src.sass,['styles']);
