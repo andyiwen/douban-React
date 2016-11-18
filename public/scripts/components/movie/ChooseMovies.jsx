@@ -5,7 +5,7 @@ import ChooseMovieTitle from './ChooseMovieTitle';
 
 /* 选电影/选电视剧区域整体组件 */
 class ChooseMovies extends React.Component {
-  constructor() {
+  constructor() {   // 构造函数
     super();
     this.state = {
       filmTitle: ['热门','最新','经典','豆瓣高分','冷门佳片','华语','欧美','韩国'],
@@ -16,10 +16,20 @@ class ChooseMovies extends React.Component {
     }
   }
   render() {
+    // 电影列表
     let filmList = [];
+
+    console.log(123);
+    // console.log(this.state);
+    // console.log(this);
+    
+    // 什么时候为 false
     if(!this.state.loading) {
+      // 当前数据   state
       let currentData = this.state.currentData;
       if (currentData && currentData.movies) {
+        // currentData  movieItem => movies数组对象，index 下标
+        // forEach 循环
         currentData.movies.forEach((movieItem, index) => {
           filmList.push(
             <ChooseMovieItem data = {movieItem} key = {index} />

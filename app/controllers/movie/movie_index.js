@@ -44,7 +44,7 @@ exports.index = function(req,res){
       });
   // 如果是选电影/选电视剧区发送的分类切换请求
   }else if(_fliterName) {
-    Category
+    Category  // 类别
       .findOne({name:_fliterName})
       .populate({
         path:'movies',

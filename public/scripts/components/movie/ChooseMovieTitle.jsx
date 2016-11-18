@@ -2,9 +2,11 @@ import React from 'react';
 
 /* 选电影/选电视剧标题组件 */
 class ChooseMoviesTitle extends React.Component {
+  // 构造函数
   constructor(props) {
     super(props);
   }
+  // 
   render() {
     let titleSeleted = this.props.selected,       // 获取父组件中初始选取的标题
         filmTitle = this.props.filmTitle,          // 获取父组件全部标题名称
@@ -27,6 +29,7 @@ class ChooseMoviesTitle extends React.Component {
       </ul>
     );
   }
+  // 
   handleTitleChang(titleName) {
     if(this.props.selected !== titleName) {
       this.props.onDataChange(titleName);
