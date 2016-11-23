@@ -1,53 +1,82 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import ChooseMovieItem from './ChooseMovieItem';
-// import ChooseMovieTitle from './ChooseMovieTitle';
+import React      from 'react';
+import ReactDOM   from 'react-dom';
 
-var imageDatas = [
-	{
-		"fileName": "1.jpg"
-		, "title": "H T T"
-		, "desc": "Here he comes Here comes Speed Racer."
-	},
-	{
-		"fileName": "2.jpg"
-		, "title": "H T T"
-		, "desc": "Here he comes Here comes Speed Racer."
-	},
-	{
-		"fileName": "3.jpg"
-		, "title": "H T T"
-		, "desc": "Here he comes Here comes Speed Racer."
-	},
-	{
-		"fileName": "4.jpg"
-		, "title": "H T T"
-		, "desc": "Here he comes Here comes Speed Racer."
-	}
-];
-
-// var imageURL = require('./img/1.jpg');
-// var imageURL = require('../img/1.jpg');
-// var imageURL = require('../images/footer/1.jpg');
-// var imageURL = require('/libs/images/movie/middleImg/1.jpg');
-
+/* 假数据 */
+var fromsDatas = {
+    "fileName": "1.jpg"
+    , "title": "H T T"
+    , "desc": "Here he comes Here comes Speed Racer."
+    , "imageDatas": [
+      {
+        "fileName": "1.jpg"
+        , "title": "H T T"
+        , "desc": "Here he comes Here comes Speed Racer."
+      },
+      {
+        "fileName": "2.jpg"
+        , "title": "H T T"
+        , "desc": "Here he comes Here comes Speed Racer."
+      },
+      {
+        "fileName": "3.jpg"
+        , "title": "H T T"
+        , "desc": "Here he comes Here comes Speed Racer."
+      },
+      {
+        "fileName": "4.jpg"
+        , "title": "H T T"
+        , "desc": "Here he comes Here comes Speed Racer."
+      }
+    ]
+};
+/*
+console.log(1234);
+console.log(fromsDatas);
+console.log(fromsDatas.imageDatas);
+ */
 var imageURL = '/libs/images/movie/testImg/1.jpg';
 
+fromsDatas.imageDatas = (function getImageURL(fromsDatasArr){
+  for (var i = 0, j = fromsDatasArr.length; i < j; i++) {
+    var singleImageData = fromsDatasArr[i];
 
-imageDatas = (function getImageURL(imageDatasArr){
-	for (var i = 0, j = imageDatasArr.length; i < j; i++) {
-		var singleImageData = imageDatasArr[i];
+    singleImageData.imageURL = '/libs/images/movie/testImg/' + singleImageData.fileName;
 
-		singleImageData.imageURL = '/libs/images/movie/testImg/' + singleImageData.fileName;
+    fromsDatasArr[i] = singleImageData;
+  }
+  // console.log(fromsDatasArr);
 
-		imageDatasArr[i] = singleImageData;
-	}
+  return fromsDatasArr;
+})(fromsDatas.imageDatas);
 
-	return imageDatasArr;
-})(imageDatas);
 
-// imageDatas = getImageURL(imageDatas);
+/* 选电影/选电视剧内容组件 */
+class ImgFigure extends React.Component {
+    
+    styles() {
+        return({
+          abc: {
+              width: '40px'
+            , height: '40px'
+          }
+        })
+    }
+       
+  render() {
+    // console.log(this);
+    return (
+      <figure>
+       <img className="imgarea" src={this.props.data.imageURL} style={this.styles().abc} />
+       <figcaption>
+         <h2></h2>
+       </figcaption>
+     </figure>
+    );
+  }
+}
+/* 选电影/选电视剧内容组件--End */
 
+module.exports = ImgFigure;
 
 
 /* 选电影/选电视剧区域整体组件 */
@@ -62,48 +91,65 @@ class MoviesTest extends React.Component {
       currentData: {}
     }
   }
+
   render() {
-    // 电影列表
-    let filmList = [];
+    let controllerUnits= [],
+      imgFigures = [];
 
-    console.log(11);
-    
-    // 什么时候为 false
-    if(!this.state.loading) {
-      // 当前数据   state
-      let currentData = this.state.currentData;
-      if (currentData && currentData.movies) {
-        // currentData  movieItem => movies数组对象，index 下标
-        // forEach 循环
+    fromsDatas.imageDatas.forEach(function (value, index) {
+      imgFigures.push(<ImgFigure key={index} ref={'imgFigure' + index} data={value} />);
+    });
 
-        // currentData.movies.forEach((movieItem, index) => {
-        //   filmList.push(
-        //     <ChooseMovieItem data = {movieItem} key = {index} />
-        //   );
-        // });
-      }
-    }
     return (
       <div className = "movies_test">
-      	<div className = "aera">
-      		<img src={imageURL} />
-      	</div>
+        <div className = "aera">
+          <img src={imageURL} />
+        </div>
 
-      	<section className="stage">
-      		<section className="img-sec">
-      		</section>
-      		<nav className="controller-nav">
-      		</nav>
-      	</section>
-
-        
+        <section ref="stage" className="stage">
+          <section className="img-sec">
+            {imgFigures}
+          </section>
+          <nav className="controller-nav">
+            {controllerUnits}
+          </nav>
+        </section>
       </div>
     );
   }
+
   componentDidMount() {
     let value = this.state.selected;
     this.getData(value);
+    // console.log(123);
+    // console.log(this.refs);
+
+    // 首先拿到舞台的大小
+    var stageDOM = ReactDOM.findDOMNode(this.refs.stage),
+    // var stageDOM = this.refs.stage.getDOMNode(),
+        stageW = stageDOM.scrollWidth,
+        stageH = stageDOM.scrollHeight,
+        halfStageW = Math.ceil(stageW / 2),
+        halfStageH = Math.ceil(stageH / 2);
+
+    // 拿到一个imageFigure的大小
+    var imgFigureDOM = ReactDOM.findDOMNode(this.refs.imgFigure0),
+    // var imgFigureDOM = this.refs.imgFigure0.getDOMNode(),
+        imgW = imgFigureDOM.scrollWidth,
+        imgH = imgFigureDOM.scrollHeight,
+        halfImgW = Math.ceil(imgW / 2),
+        halfImgH = Math.ceil(imgH / 2);
+
+    console.log(halfImgW);
+    console.log(halfImgW);
+
+    // 计算中心图片的位置点
+    // this.Constant.centerPos = {
+    //     left: halfStageW - halfImgW,
+    //     top: halfStageH - halfImgH
+    // };
   }
+
   getData(value) {
     // 判断data数组中是否已有该标题对应的数据，如果有则将该值赋给currentData并返回
     for(let item of this.state.data) {
