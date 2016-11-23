@@ -1,6 +1,7 @@
 "use strict";
-import ChooseMovies from './ChooseMovies';              // 引入选电影/选电视剧React组件
-import MoviesTest   from './MoviesTest';							  // 引入测试的React组件
+// import ChooseMovies from './ChooseMovies';              // 引入选电影/选电视剧React组件
+import MoviesTest   from './MoviesTest';                // 引入测试的React组件
+// import FromList   from './FromList';							  // 引入测试的React组件
 
 $.support.cors = true;                                  // 解决IE8/9 Ajax跨域请求问题
 
