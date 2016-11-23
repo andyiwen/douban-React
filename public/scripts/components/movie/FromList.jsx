@@ -29,10 +29,14 @@ var fromsDatas = {
     	}
     ]
 };
-
+/*
+console.log(1234);
+console.log(fromsDatas);
+console.log(fromsDatas.imageDatas);
+ */
 var imageURL = '/libs/images/movie/testImg/1.jpg';
 
-fromsDatas.imageDatass = (function getImageURL(fromsDatasArr){
+fromsDatas.imageDatas = (function getImageURL(fromsDatasArr){
 	for (var i = 0, j = fromsDatasArr.length; i < j; i++) {
 		var singleImageData = fromsDatasArr[i];
 
@@ -59,9 +63,10 @@ class ImgFigure extends React.Component {
     }
        
   render() {
+    // console.log(this);
     return (
       <figure>
-       <img className="imgarea" src={imageURL} style={this.styles().abc} />
+       <img className="imgarea" src={this.props.data.imageURL} style={this.styles().abc} />
        <figcaption>
          <h2></h2>
        </figcaption>
@@ -90,12 +95,8 @@ class FromList extends React.Component {
   render() {
   	let controllerUnits= [],
   		imgFigures = [];
-    // console.log(112);
-    // console.log(imageDatas);
 
-  	imageDatas.forEach(function (value, index) {
-      // console.log(115);
-      // console.log(value);
+  	fromsDatas.imageDatas.forEach(function (value, index) {
   		imgFigures.push(<ImgFigure key={index} ref={'imgFigure' + index} data={value} />);
   	});
 
