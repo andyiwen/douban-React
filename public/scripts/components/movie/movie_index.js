@@ -1,7 +1,7 @@
 "use strict";
 // import ChooseMovies from './ChooseMovies';              // 引入选电影/选电视剧React组件
-import MoviesTest   from './MoviesTest';                // 引入测试的React组件
-// import FromList   from './FromList';							  // 引入测试的React组件
+// import MoviesTest   from './MoviesTest';                // 引入测试的React组件
+import FromList   from './FromList';							  // 引入测试的React组件
 
 $.support.cors = true;                                  // 解决IE8/9 Ajax跨域请求问题
 
@@ -14,7 +14,7 @@ $(function() {
       即将上映和正在上映点击切换事件
     */
     var gallerySwitch = (function() {
-      console.log(331);
+      // console.log(331);
       var $oPanel = $('#scrollMoives .panel'),          // 获取顶部轮播图面板对象
           $oTitle = $('#headerNow span'),               // 获取即将上映标题对象
           page = 1,                                     // 初始页码

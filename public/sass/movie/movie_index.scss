@@ -28,6 +28,24 @@
 }
 .row{margin:0;}
 
+
+
+
+.from_list {
+	margin: 20px 0;
+
+	.aera {
+		/*display: none;*/
+		margin: 0 auto;
+		background-color: #f1f1f1; width: 700px; height: 800px;
+
+		img{
+			width: 200px;
+			height: 1s00px;
+		}
+	}
+}
+
 .movies_test {
 	/* screen */
 	margin: 20px 0;
@@ -40,8 +58,6 @@
 			height: 200px;
 		}
 	}
-
-
 }
 
 .stage{
@@ -59,6 +75,13 @@
 		overflow: hidden;
 		
 		background-color: #ddd;
+		figure{
+				/*background-color: #f1f;*/
+				width: 40px;
+
+				height: 70px;
+				overflow: hidden;
+			}
 	}
 
 	.controller-nav{

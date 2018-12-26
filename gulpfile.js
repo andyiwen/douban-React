@@ -59,6 +59,11 @@ gulp.task('images', function() {
  * 2. sudo gulp  
  * 3. webpack -w
  * 该 task 未起作用，需分别执行四个子 task，然后执行 webpack -w 合并react jsx 文件
+ * 4. mongo 更新
+ * http://img3.doubanio.com/view/movie_poster_cover/lpst/public/p2293954118.jpg
+ * http://img3.douban.com/view/movie_poster_cover/lpst/public/p2276189752.jpg
+ * 5. 查询、替换
+ * 
  */ 
 // watch
 gulp.task('watch', function() {

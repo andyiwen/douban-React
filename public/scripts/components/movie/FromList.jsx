@@ -1,5 +1,8 @@
 import React      from 'react';
 import ReactDOM   from 'react-dom';
+/* 引入子组件 */
+import FromListItem   from './FromListItem';
+
 
 /* 假数据 */
 var fromsDatas = {
@@ -50,46 +53,51 @@ fromsDatas.imageDatas = (function getImageURL(fromsDatasArr){
 })(fromsDatas.imageDatas);
 
 
-/* 选电影/选电视剧内容组件 */
-class ImgFigure extends React.Component {
-    
-    styles() {
-        return({
-          abc: {
-              width: '40px'
-            , height: '40px'
-          }
-        })
-    }
-       
-  render() {
-    // console.log(this);
-    return (
-      <figure>
-       <img className="imgarea" src={this.props.data.imageURL} style={this.styles().abc} />
-       <figcaption>
-         <h2></h2>
-       </figcaption>
-     </figure>
-    );
-  }
-}
-/* 选电影/选电视剧内容组件--End */
-
-module.exports = ImgFigure;
-
 
 /* 选电影/选电视剧区域整体组件 */
 class FromList extends React.Component {
   constructor() {   // 构造函数
     super();
     this.state = {
-      filmTitle: ['热门','最新','经典','豆瓣高分','冷门佳片','华语','欧美','韩国'],
+      // filmTitle: ['热门','最新','经典','豆瓣高分','冷门佳片','华语','欧美','韩国'],
+      filmTitle: [],
       selected: '热门',
       loading: true,
       data: [],
-      currentData: {}
+      currentData: {},
+      userName: '',
+      
     }
+  }
+  
+  list() {
+  
+    return (
+      <div>
+        <table>
+        <tbody>
+          <tr>
+            <td>12121</td>
+            <td><input type="text" /></td>
+            <td><img src="" /></td>
+            <td>提示信息</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    )
   }
 
   render() {
@@ -97,23 +105,23 @@ class FromList extends React.Component {
   		imgFigures = [];
 
   	fromsDatas.imageDatas.forEach(function (value, index) {
-  		imgFigures.push(<ImgFigure key={index} ref={'imgFigure' + index} data={value} />);
+  		imgFigures.push(<FromListItem key={index} ref={'imgFigure' + index} data={value} />);
   	});
+    // <img src={imageURL} />
+    // {imgFigures}
 
     return (
-      <div className = "movies_test">
+      <div className = "from_list">
       	<div className = "aera">
-      		<img src={imageURL} />
+          {this.list()}
       	</div>
 
       	<section ref="stage" className="stage">
       		<section className="img-sec">
       			{imgFigures}
       		</section>
-      		<nav className="controller-nav">
-      			{controllerUnits}
-      		</nav>
       	</section>
+
       </div>
     );
   }
@@ -141,7 +149,7 @@ class FromList extends React.Component {
         halfImgH = Math.ceil(imgH / 2);
 
     console.log(halfImgW);
-    console.log(halfImgW);
+    console.log(halfImgH);
 
     // 计算中心图片的位置点
     // this.Constant.centerPos = {
